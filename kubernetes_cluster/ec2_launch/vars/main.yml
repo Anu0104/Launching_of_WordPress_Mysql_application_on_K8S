@@ -1,0 +1,17 @@
+---
+# vars file for ec2_launch
+
+aws_access_key: "aws_access_key"
+aws_secret_key: "aws_secret_key"
+key_name: "kubernetes_key"
+instance_type: "t2.micro"
+image_name: "ami-0bcf5425cdc1d8a85"
+region: "ap-south-1"
+vpc_id: "subnet-047c91776a3602435"
+security_group_id: "sg-06b0602ca4b73f740"
+os_names:
+        - "Kubernetes_Master"
+        - "Kubernetes_Slave1"
+        - "Kubernetes_Slave2"
+
+

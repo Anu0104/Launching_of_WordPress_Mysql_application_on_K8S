@@ -1,0 +1,25 @@
+---
+# tasks file for ec2_launch
+
+- name: Provision Instances
+  ec2:
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        key_name: "{{ key_name }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ image_name }}"
+        wait: yes
+        count: 1
+        region: "{{ region }}"
+        vpc_subnet_id: "{{ vpc_id }}"
+        group_id: "{{ security_group_id }}"
+        assign_public_ip: yes
+        state: present
+        instance_tags:
+                Name: "{{ item }}"
+  loop: "{{ os_names }}"
+  register: os_output
+
+- debug:
+      var: os_output
+

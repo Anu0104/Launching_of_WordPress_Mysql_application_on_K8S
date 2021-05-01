@@ -1,0 +1,14 @@
+- hosts: kubernetes_master
+  roles:
+  - name: " Configuration of Kubernetes_master "  
+    role: "/etc/roles/kubernetes_cluster/kubernetes_master"
+
+- hosts: kubernetes_slaves
+  vars_prompt:
+  - name: "token"
+    prompt: "Enter token to connect with master "
+    private: no
+  roles:
+  - name: " Configuration of Kubernetes_slaves "
+    role: "/etc/roles/kubernetes_cluster/kubernetes_slaves"
+

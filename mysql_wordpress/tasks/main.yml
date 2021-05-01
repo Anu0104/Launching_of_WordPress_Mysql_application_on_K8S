@@ -1,0 +1,59 @@
+---
+# tasks file for mysql_wordpress
+
+- name: Create the workspace 
+  file: 
+      name: "mysql_ws"
+      path: /root/
+      state: directory
+
+- name: Copy the mysql_pod file 
+  template:
+      src: "/etc/roles/mysql_wordpress/mysql_wordpress/templates/mysql.yml"
+      dest: "/root/mysql_ws/"
+
+- name: Copy the wordpress_pod file
+  copy: 
+      src: "/etc/roles/mysql_wordpress/mysql_wordpress/files/wordpress.yml"
+      dest: "/root/mysql_ws/"
+
+- name: Copy service file
+  copy:
+      src: "/etc/roles/mysql_wordpress/mysql_wordpress/files/service.yml"
+      dest: "/root/mysql_ws/"
+
+- name: Creating mysql pod
+  shell: "kubectl apply -f /root/mysql_ws/mysql.yml"
+  register: mysql_pod
+
+- name: Status of mysql pod
+  debug:
+      var: mysql_pod
+
+- name: Creating wordpress pod
+  shell: "kubectl apply -f /root/mysql_ws/wordpress.yml"
+  register: wp_pod
+
+- name: Status of wordpress pod
+  debug:
+      var: wp_pod
+
+- name: Creating the service
+  shell: "kubectl apply -f /root/mysql_ws/service.yml"
+  register: svc
+
+- name: Status of service/lb
+  debug:
+      var: svc
+
+- name: "Pausing playbook for 60 seconds"
+  pause: 
+    seconds: 60
+
+- name: "Getting all pods"
+  shell: "kubectl get pods -o wide"
+  register: pods 
+
+- debug:
+    var: "pods.stdout_lines"
+

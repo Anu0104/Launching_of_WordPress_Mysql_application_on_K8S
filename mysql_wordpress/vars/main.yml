@@ -1,0 +1,7 @@
+---
+# vars file for mysql_wordpress
+
+mysql_root_pass: redhat
+database_name: mydb
+mysql_user_name: mysqldb
+mysql_user_pass: redhat

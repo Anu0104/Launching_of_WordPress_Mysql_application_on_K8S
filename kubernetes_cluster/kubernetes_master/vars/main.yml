@@ -1,0 +1,7 @@
+---
+# vars file for kubernetes_master
+
+packages:
+        - kubelet
+        - kubeadm
+        - kubectl

@@ -1,0 +1,5 @@
+- hosts: localhost
+  roles:
+  - name: " Launching the ec2 instances "
+    role: "/etc/roles/kubernetes_cluster/ec2_launch"
+

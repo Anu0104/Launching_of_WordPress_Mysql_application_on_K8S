@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: mysql 
+  name: mysqlpod
+spec:
+  containers:
+  - env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: "{{mysql_root_pass}}"
+    - name: MYSQL_DATABASE
+      value: "{{database_name}}"
+    - name: MYSQL_USER
+      value: "{{mysql_user_name}}"
+    - name: MYSQL_PASS
+      value: "{{mysql_user_pass}}"
+    image: mysql:5.7
+    name: mysql

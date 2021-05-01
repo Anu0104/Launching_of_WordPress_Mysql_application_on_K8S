@@ -1,0 +1,5 @@
+- hosts: kubernetes_master
+  roles:
+  - name: " Configuration of wordpress and mysql pods "
+    role: "/etc/roles/mysql_wordpress/mysql_wordpress"
+
